@@ -13,8 +13,10 @@ import User from '../models/user'
 // POST /auth/login
 const login = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const { email, password } = req.body
-        const user = await User.findUserByCredentials(email, password)
+        const { email, password } = req.body;
+        console.log({ email, password });
+        const user = await User.findUserByCredentials(email, password);
+        console.log({ user });
         const accessToken = user.generateAccessToken()
         const refreshToken = await user.generateRefreshToken()
         res.cookie(
